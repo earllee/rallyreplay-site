@@ -4,7 +4,9 @@ import Band from '../components/Band.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import { pageMeta, privacy } from '../content/site';
+import { SUPPORT_EMAIL } from '../lib/config';
 import { breadcrumbEntity } from '../lib/schema';
+import { href } from '../lib/url';
 
 const meta = pageMeta.privacy;
 const pageJsonLd = {
@@ -27,7 +29,13 @@ const [aiBeforeLink, aiAfterLink] = aiSection.body.split('OpenAI’s privacy pol
           {aiBeforeLink}<a href="https://openai.com/policies/privacy-policy">OpenAI’s privacy policy</a>{aiAfterLink}
         </p>
       ) : index === privacy.sections.length - 1 ? (
-        <p class="policy-copy"><a href="mailto:earlvlee@gmail.com?subject=Rally%20Replay%20privacy">{section.body}</a></p>
+        SUPPORT_EMAIL ? (
+          <p class="policy-copy">
+            <a href={`mailto:${SUPPORT_EMAIL}?subject=Rally%20Replay`}>{SUPPORT_EMAIL}</a>
+          </p>
+        ) : (
+          <p class="policy-copy">Contact: see the <a href={href('/support/')}>support page</a>.</p>
+        )
       ) : (
         <p class="policy-copy">{section.body}</p>
       )}

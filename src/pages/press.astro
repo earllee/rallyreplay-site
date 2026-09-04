@@ -5,6 +5,7 @@ import Band from '../components/Band.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
 import { pageMeta, press, pressFrames } from '../content/site';
+import { SUPPORT_EMAIL } from '../lib/config';
 import { breadcrumbEntity } from '../lib/schema';
 import { href } from '../lib/url';
 import frame01 from '../assets/press-thumbs/01-skip-to-the-good-parts.png';
@@ -40,7 +41,15 @@ const pageJsonLd = {
       {press.facts.map(([term, value]) => (
         <div>
           <dt>{term}</dt>
-          <dd>{value}</dd>
+          <dd>
+            {term === 'Contact' ? (
+              SUPPORT_EMAIL ? (
+                <a href={`mailto:${SUPPORT_EMAIL}?subject=Rally%20Replay`}>{SUPPORT_EMAIL}</a>
+              ) : (
+                <>via the <a href={href('/support/')}>support page</a></>
+              )
+            ) : value}
+          </dd>
         </div>
       ))}
     </dl>
@@ -140,6 +149,13 @@ const pageJsonLd = {
   dd {
     margin: 0;
     color: #d2d2d7;
+  }
+
+  dd a {
+    font-weight: 650;
+    text-decoration-color: var(--yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
   }
 
   .press-grid {

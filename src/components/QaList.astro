@@ -1,7 +1,15 @@
 ---
+import { href } from '../lib/url';
+
+interface AnswerLink {
+  label: string;
+  url: string;
+}
+
 interface QaItem {
   question: string;
   answer: string;
+  answerParts?: readonly (string | AnswerLink)[];
 }
 
 interface Props {
@@ -16,7 +24,15 @@ const { items, columns = false } = Astro.props;
   {items.map((item) => (
     <article>
       <h3>{item.question}</h3>
-      <p>{item.answer}</p>
+      <p>
+        {item.answerParts
+          ? item.answerParts.map((part) =>
+              typeof part === 'string' ? part : (
+                <a href={part.url.startsWith('/') ? href(part.url) : part.url}>{part.label}</a>
+              ),
+            )
+          : item.answer}
+      </p>
     </article>
   ))}
 </div>
@@ -43,6 +59,13 @@ const { items, columns = false } = Astro.props;
   p {
     margin: 0;
     color: #c7c7cc;
+  }
+
+  p a {
+    font-weight: 650;
+    text-decoration-color: var(--yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
   }
 
   @media (min-width: 820px) {

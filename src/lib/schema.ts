@@ -1,4 +1,5 @@
 import { href } from './url';
+import { SUPPORT_EMAIL } from './config';
 
 export function absoluteUrl(path: string, site: URL): string {
   return new URL(href(path), site).href;
@@ -12,12 +13,15 @@ export function organizationEntity(site: URL) {
     name: 'Rally Replay',
     url: root,
     logo: absoluteUrl('/brand/icon-1024.png', site),
-    founder: { '@type': 'Person', name: 'Earl Lee' },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      email: 'earlvlee@gmail.com',
-      contactType: 'customer support',
-    },
+    ...(SUPPORT_EMAIL
+      ? {
+          contactPoint: {
+            '@type': 'ContactPoint',
+            email: SUPPORT_EMAIL,
+            contactType: 'customer support',
+          },
+        }
+      : {}),
   };
 }
 

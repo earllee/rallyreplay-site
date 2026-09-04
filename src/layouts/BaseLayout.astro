@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import JsonLd from '../components/JsonLd.astro';
+import { organizationEntity } from '../lib/schema';
 import { href } from '../lib/url';
 
 interface Props {
@@ -20,19 +21,7 @@ const canonicalUrl = new URL(href(path), Astro.site).href;
 const iconUrl = new URL(href('/brand/icon-1024.png'), Astro.site).href;
 const ogImageUrl = new URL(href('/brand/og-default.png'), Astro.site).href;
 
-const organization = {
-  '@type': 'Organization',
-  '@id': `${siteUrl}#organization`,
-  name: 'Rally Replay',
-  url: siteUrl,
-  logo: iconUrl,
-  founder: { '@type': 'Person', name: 'Earl Lee' },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    email: 'earlvlee@gmail.com',
-    contactType: 'customer support',
-  },
-};
+const organization = organizationEntity(Astro.site!);
 
 const siteJsonLd = {
   '@context': 'https://schema.org',

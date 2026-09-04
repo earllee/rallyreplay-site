@@ -1,4 +1,13 @@
-import { APP_STORE_URL } from '../lib/config';
+import { APP_STORE_URL, SUPPORT_EMAIL, SUPPORT_EMPTY_STATE } from '../lib/config';
+
+const supportPath = '/support/';
+const supportMailto = SUPPORT_EMAIL ? `mailto:${SUPPORT_EMAIL}?subject=Rally%20Replay` : '';
+const faqHelpAnswer = `Through the support page at ${supportPath}. A short clip of the footage that gave the detector trouble helps enormously${
+  SUPPORT_EMAIL ? `, or email ${SUPPORT_EMAIL}` : ''
+}.`;
+const faqHelpMarkdown = `Through the support page at [${supportPath}](${supportPath}). A short clip of the footage that gave the detector trouble helps enormously${
+  SUPPORT_EMAIL ? `, or email [${SUPPORT_EMAIL}](${supportMailto})` : ''
+}.`;
 
 export const appStoreCtaText = {
   available: 'Download on the App Store',
@@ -267,7 +276,7 @@ export const howItWorks = {
     accuracy: {
       heading: 'How accurate is it?',
       paragraphs: [
-        'On a court with one game and a phone within earshot, Rally Replay finds nearly every rally with edges within a few tenths of a second of the serve and the ball going dead. The hard case is a busy rec center with games on both sides and a far-away phone: some quiet, far-side points can be missed and occasional strikes from the next court can be picked up. Both have a fix.',
+        'On a court with one game and a phone within earshot, Rally Replay finds almost every rally with edges within a few tenths of a second of the serve and the ball going dead. The hard case is a busy rec center with games on both sides and a far-away phone: some quiet, far-side points can be missed and occasional strikes from the next court can be picked up. Both have a fix.',
       ],
     },
     calibration: {
@@ -332,7 +341,7 @@ export const faq = {
     {
       question: 'How accurate is rally detection?',
       answer:
-        'On a court with one game and a phone within earshot it finds nearly every rally. Busy rec centers with games on adjacent courts are the hard case — some far-side points can be missed and the next court can occasionally be picked up. Marking a few rallies by hand and running “Fit detector to my labels” in Settings → Calibrate fixes both for your court.',
+        'On a court with one game and a phone within earshot it finds almost every rally. Busy rec centers with games on adjacent courts are the hard case — some far-side points can be missed and the next court can occasionally be picked up. Marking a few rallies by hand and running “Fit detector to my labels” in Settings → Calibrate fixes both for your court.',
     },
     {
       question: 'What if it misses a rally?',
@@ -374,7 +383,17 @@ export const faq = {
     },
     {
       question: 'How do I get help?',
-      answer: 'Email earlvlee@gmail.com. A short clip of the footage that gave the detector trouble helps enormously.',
+      answer: faqHelpAnswer,
+      markdownAnswer: faqHelpMarkdown,
+      answerParts: [
+        'Through the support page at ',
+        { label: supportPath, url: supportPath },
+        '. A short clip of the footage that gave the detector trouble helps enormously',
+        ...(SUPPORT_EMAIL
+          ? ([', or email ', { label: SUPPORT_EMAIL, url: supportMailto }] as const)
+          : []),
+        '.',
+      ],
     },
   ],
 } as const;
@@ -383,11 +402,10 @@ export const support = {
   eyebrow: 'SUPPORT',
   heading: { before: 'We’ll get you ', band: 'back on court.', after: '' },
   directAnswer:
-    'Rally Replay is made by one developer. Email earlvlee@gmail.com and you’ll get a reply from the person who wrote the detector.',
+    'Rally Replay is made by one developer, and support requests go straight to the person who wrote the detector.',
   contact: {
     heading: 'Contact',
-    body:
-      'Attaching a 10–20 second clip of the problem section — or telling me the timestamp — is the fastest way to a fix. Bug reports welcome; feature requests too.',
+    body: SUPPORT_EMAIL || SUPPORT_EMPTY_STATE,
   },
   troubleshootingHeading: 'Troubleshooting',
   items: [
@@ -451,7 +469,7 @@ export const privacy = {
       heading: 'Changes',
       body: 'If this policy changes, the new version will be posted at this address with a new effective date.',
     },
-    { heading: 'Contact', body: 'earlvlee@gmail.com' },
+    { heading: 'Contact', body: SUPPORT_EMAIL || 'Contact: see the support page.' },
   ],
 } as const;
 
@@ -459,7 +477,7 @@ export const press = {
   eyebrow: 'PRESS KIT',
   heading: { before: 'Everything you need to ', band: 'write about it.', after: '' },
   directAnswer:
-    'Rally Replay is a $9.99 iPhone app that finds every rally in a pickleball video on-device in seconds and exports highlight reels with the dead time removed. It launched in September 2026 and is made by Earl Lee, an independent developer and rec player in New York.',
+    'Rally Replay is a $9.99 iPhone app that finds every rally in a pickleball video on-device in seconds and exports highlight reels with the dead time removed. It launched in September 2026 and is made by an independent developer who plays recreational pickleball.',
   boilerplateHeading: 'Boilerplate',
   boilerplate: [
     {
@@ -471,8 +489,8 @@ export const press = {
       body: 'Rally Replay is an iPhone app for reviewing pickleball videos. It detects rallies from the sound of paddle contact — entirely on-device, no upload — then lets players jump point to point, watch in slow motion at full resolution, and export single rallies or a dead-time-free highlight reel to Photos. It costs $9.99 once. Optional AI coaching works with the user’s own OpenAI key.',
     },
     {
-      label: 'Founder',
-      body: 'Earl Lee is a software engineer and recreational pickleball player in New York. He built Rally Replay after getting tired of scrubbing through camcorder footage at 2× looking for one good point.',
+      label: 'Maker',
+      body: 'Rally Replay is built by an independent developer and recreational pickleball player who got tired of scrubbing through camcorder footage at 2× looking for one good point.',
     },
   ],
   factsHeading: 'Facts',
@@ -483,8 +501,8 @@ export const press = {
     ['Launch', 'September 2026'],
     ['Detection', 'on-device audio signal processing'],
     ['Network use', 'none, except optional OpenAI calls under the user’s own key'],
-    ['Developer', 'Earl Lee, New York'],
-    ['Contact', 'earlvlee@gmail.com'],
+    ['Developer', 'Independent'],
+    ['Contact', SUPPORT_EMAIL || 'via the support page'],
   ],
   screenshotsHeading: 'Screenshots',
   screenshotsNote: 'Real footage, real detections — nothing in these images is mocked.',
@@ -500,7 +518,6 @@ export const llmsFacts = [
   'Manual marking and on-device calibration fix missed or extra rallies.',
   'Optional AI coaching uses the user’s own OpenAI API key; the app’s only network call; cost estimate shown before every run.',
   'Privacy: no analytics, no servers, add-only Photos access.',
-  'Developer: Earl Lee, New York. Support: earlvlee@gmail.com.',
 ] as const;
 
 export type PageKey = keyof typeof pageMeta;
@@ -512,8 +529,9 @@ const joinHeading = (heading: { before: string; band: string; after: string }) =
 const numbered = (items: readonly { title: string; body: string }[]) =>
   items.map((item, index) => `${index + 1}. **${item.title}** ${item.body}`).join('\n');
 
-const qaMarkdown = (items: readonly { question: string; answer: string }[]) =>
-  items.map((item) => `### ${item.question}\n\n${item.answer}`).join('\n\n');
+const qaMarkdown = (
+  items: readonly { question: string; answer: string; markdownAnswer?: string }[],
+) => items.map((item) => `### ${item.question}\n\n${item.markdownAnswer ?? item.answer}`).join('\n\n');
 
 const ctaMarkdown = () =>
   APP_STORE_URL
@@ -590,7 +608,7 @@ export function pageMarkdown(key: PageKey): string {
       support.eyebrow,
       support.directAnswer,
       `## ${support.contact.heading}`,
-      `Email: earlvlee@gmail.com\n\n${support.contact.body}`,
+      SUPPORT_EMAIL ? `[${SUPPORT_EMAIL}](${supportMailto})` : support.contact.body,
       `## ${support.troubleshootingHeading}`,
       qaMarkdown(support.items),
       support.links,
@@ -602,7 +620,15 @@ export function pageMarkdown(key: PageKey): string {
       `# ${joinHeading(privacy.heading)}`,
       privacy.eyebrow,
       privacy.directAnswer,
-      privacy.sections.map((section) => `## ${section.heading}\n\n${section.body}`).join('\n\n'),
+      privacy.sections
+        .map((section) => {
+          if (section.heading !== 'Contact') return `## ${section.heading}\n\n${section.body}`;
+          const contact = SUPPORT_EMAIL
+            ? `[${SUPPORT_EMAIL}](${supportMailto})`
+            : 'Contact: see the [support page](/support/).';
+          return `## ${section.heading}\n\n${contact}`;
+        })
+        .join('\n\n'),
     ].join('\n\n');
   }
 
@@ -613,7 +639,15 @@ export function pageMarkdown(key: PageKey): string {
     `## ${press.boilerplateHeading}`,
     press.boilerplate.map((item) => `### ${item.label}\n\n${item.body}`).join('\n\n'),
     `## ${press.factsHeading}`,
-    press.facts.map(([term, value]) => `- **${term}:** ${value}`).join('\n'),
+    press.facts
+      .map(([term, value]) => {
+        if (term !== 'Contact') return `- **${term}:** ${value}`;
+        const contact = SUPPORT_EMAIL
+          ? `[${SUPPORT_EMAIL}](${supportMailto})`
+          : '[via the support page](/support/)';
+        return `- **${term}:** ${contact}`;
+      })
+      .join('\n'),
     `## ${press.screenshotsHeading}`,
     pressFrames.map((frame) => `- [${frame.caption}](/press/${frame.file})`).join('\n'),
     press.screenshotsNote,

@@ -5,6 +5,7 @@ import PageHero from '../components/PageHero.astro';
 import QaList from '../components/QaList.astro';
 import Section from '../components/Section.astro';
 import { pageMeta, support } from '../content/site';
+import { SUPPORT_EMAIL } from '../lib/config';
 import { breadcrumbEntity } from '../lib/schema';
 import { href } from '../lib/url';
 
@@ -23,8 +24,11 @@ const pageJsonLd = {
 
   <Section title={support.contact.heading} compact>
     <div class="contact-block">
-      <p>Email: <a href="mailto:earlvlee@gmail.com?subject=Rally%20Replay">earlvlee@gmail.com</a></p>
-      <p>{support.contact.body}</p>
+      {SUPPORT_EMAIL ? (
+        <p><a href={`mailto:${SUPPORT_EMAIL}?subject=Rally%20Replay`}>{SUPPORT_EMAIL}</a></p>
+      ) : (
+        <p>{support.contact.body}</p>
+      )}
     </div>
   </Section>
 

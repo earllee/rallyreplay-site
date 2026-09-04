@@ -31,10 +31,10 @@ SITE_URL=http://localhost:4321 BASE_PATH=/ npm run preview
 
 Pushing `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which installs dependencies, builds `dist/`, and deploys it through GitHub Pages.
 
-The workflow defaults are:
+The workflow sets these deployment values:
 
 ```text
-SITE_URL=https://earllee.github.io
+SITE_URL=https://YOUR-GITHUB-PAGES-HOST
 BASE_PATH=/rallyreplay-site
 ```
 
@@ -51,6 +51,10 @@ All site-relative links and assets pass through [`src/lib/url.ts`](src/lib/url.t
 ## Set the App Store URL
 
 Set `APP_STORE_URL` in [`src/lib/config.ts`](src/lib/config.ts) and rebuild. The shared CTA automatically changes from the “Coming soon to the App Store” badge to an App Store link everywhere it appears.
+
+## Set the support email
+
+Set `SUPPORT_EMAIL` in [`src/lib/config.ts`](src/lib/config.ts) and rebuild. While it is empty, the site directs people to the support page without rendering an email address or `mailto:` link.
 
 ## Edit copy
 

@@ -1,5 +1,6 @@
 ---
 import AppStoreCta from './AppStoreCta.astro';
+import { SUPPORT_EMAIL } from '../lib/config';
 import { href } from '../lib/url';
 ---
 
@@ -16,10 +17,10 @@ import { href } from '../lib/url';
       <a href={href('/press/')}>Press</a>
       <a href={href('/support/')}>Support</a>
       <a href={href('/privacy/')}>Privacy</a>
-      <a href="mailto:earlvlee@gmail.com?subject=Rally%20Replay">earlvlee@gmail.com</a>
+      {SUPPORT_EMAIL && <a href={`mailto:${SUPPORT_EMAIL}?subject=Rally%20Replay`}>{SUPPORT_EMAIL}</a>}
     </nav>
     <div class="maker">
-      <p>Built by Earl Lee, a rec player in New York. © 2026</p>
+      <p>Made by one pickleball player, for the rest of us. © 2026 Rally Replay</p>
       <AppStoreCta compact />
     </div>
   </div>
