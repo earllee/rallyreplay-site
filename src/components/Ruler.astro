@@ -1,0 +1,189 @@
+---
+interface Props {
+  position?: number;
+  hero?: boolean;
+}
+
+const { position = 38, hero = false } = Astro.props;
+const ticks = Array.from({ length: 48 });
+---
+
+<div class:list={['ruler', { hero }]} style={`--playhead:${position}%`} aria-hidden="true">
+  {hero && (
+    <span class="rally-band">
+      {Array.from({ length: 4 }, (_, index) => <i class={`dot-${index + 1}`} style={`--dot:${index}`} />)}
+    </span>
+  )}
+  <span class="ticks">
+    {ticks.map((_, index) => <i class:list={{ major: (index + 1) % 8 === 0 }} />)}
+  </span>
+  <span class="playhead"></span>
+</div>
+
+<style>
+  .ruler {
+    position: relative;
+    width: min(100%, 560px);
+    height: 34px;
+    margin-block-start: 1.35rem;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .ticks {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(48, 1fr);
+    align-items: end;
+    gap: 0;
+  }
+
+  .ticks i {
+    justify-self: center;
+    width: 1px;
+    height: 10px;
+    background: var(--tick);
+  }
+
+  .ticks .major {
+    height: 20px;
+    background: var(--tick-major);
+  }
+
+  .playhead {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: var(--playhead);
+    width: 4px;
+    border-radius: 2px;
+    background: var(--yellow);
+    box-shadow: 0 0 16px rgba(255, 214, 10, 0.7);
+    transform: translateX(-50%);
+  }
+
+  .rally-band {
+    position: absolute;
+    z-index: 1;
+    right: 28%;
+    bottom: 4px;
+    left: 30%;
+    height: 9px;
+    border-radius: 999px;
+    background: var(--band);
+  }
+
+  .rally-band i {
+    position: absolute;
+    bottom: 1px;
+    left: calc(12% + var(--dot) * 25%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--yellow);
+    transform: translateX(-50%);
+  }
+
+  .hero {
+    width: min(100%, 760px);
+    height: 52px;
+    margin-block-start: 2rem;
+  }
+
+  .hero .ticks i {
+    height: 15px;
+  }
+
+  .hero .ticks .major {
+    height: 30px;
+  }
+
+  .hero .rally-band {
+    bottom: 6px;
+    height: 12px;
+  }
+
+  .hero .rally-band i {
+    bottom: 2.5px;
+  }
+
+  .hero .playhead {
+    animation: scrub 14s ease-in-out infinite;
+  }
+
+  .hero .rally-band i {
+    animation: tick-pulse 14s ease-in-out infinite;
+  }
+
+  .hero .rally-band .dot-1 { animation-name: tick-pulse-1; }
+  .hero .rally-band .dot-2 { animation-name: tick-pulse-2; }
+  .hero .rally-band .dot-3 { animation-name: tick-pulse-3; }
+  .hero .rally-band .dot-4 { animation-name: tick-pulse-4; }
+
+  @keyframes scrub {
+    0%,
+    8% {
+      left: 18%;
+    }
+    50% {
+      left: 82%;
+    }
+    92%,
+    100% {
+      left: 18%;
+    }
+  }
+
+  @keyframes tick-pulse-1 {
+    0%, 17%, 21%, 79%, 83%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 214, 10, 0);
+      transform: translateX(-50%) scale(1);
+    }
+    19%, 81% {
+      box-shadow: 0 0 0 6px rgba(255, 214, 10, 0.1);
+      transform: translateX(-50%) scale(1.45);
+    }
+  }
+
+  @keyframes tick-pulse-2 {
+    0%, 24%, 28%, 72%, 76%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 214, 10, 0);
+      transform: translateX(-50%) scale(1);
+    }
+    26%, 74% {
+      box-shadow: 0 0 0 6px rgba(255, 214, 10, 0.1);
+      transform: translateX(-50%) scale(1.45);
+    }
+  }
+
+  @keyframes tick-pulse-3 {
+    0%, 31%, 35%, 65%, 69%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 214, 10, 0);
+      transform: translateX(-50%) scale(1);
+    }
+    33%, 67% {
+      box-shadow: 0 0 0 6px rgba(255, 214, 10, 0.1);
+      transform: translateX(-50%) scale(1.45);
+    }
+  }
+
+  @keyframes tick-pulse-4 {
+    0%, 38%, 42%, 58%, 62%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 214, 10, 0);
+      transform: translateX(-50%) scale(1);
+    }
+    40%, 60% {
+      box-shadow: 0 0 0 6px rgba(255, 214, 10, 0.1);
+      transform: translateX(-50%) scale(1.45);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero .playhead,
+    .hero .rally-band i {
+      animation: none;
+    }
+  }
+</style>

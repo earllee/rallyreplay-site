@@ -1,0 +1,41 @@
+---
+import Ruler from './Ruler.astro';
+
+interface Props {
+  title?: string;
+  id?: string;
+  compact?: boolean;
+  class?: string;
+}
+
+const { title, id, compact = false, class: className } = Astro.props;
+---
+
+<section id={id} class:list={['content-section', className, { compact }]}>
+  <header class="section-header">
+    <h2><slot name="heading">{title}</slot></h2>
+    <Ruler />
+  </header>
+  <div class="section-body"><slot /></div>
+</section>
+
+<style>
+  .content-section {
+    width: min(calc(100% - 48px), var(--content-width));
+    margin: clamp(6rem, 10vw, 10rem) auto 0;
+  }
+
+  .content-section.compact {
+    margin-block-start: clamp(6rem, 8vw, 8rem);
+  }
+
+  .section-header {
+    margin-block-end: clamp(2.75rem, 5vw, 5rem);
+  }
+
+  @media (min-width: 760px) {
+    .content-section {
+      width: min(calc(100% - 96px), var(--content-width));
+    }
+  }
+</style>

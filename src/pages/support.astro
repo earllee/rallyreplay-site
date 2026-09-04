@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
+import PageHero from '../components/PageHero.astro';
+import QaList from '../components/QaList.astro';
+import Section from '../components/Section.astro';
+import { pageMeta, support } from '../content/site';
+import { breadcrumbEntity } from '../lib/schema';
+import { href } from '../lib/url';
+
+const meta = pageMeta.support;
+const [faqLabel, privacyLabel] = support.links.replace('.', '').split(' and ');
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [breadcrumbEntity(meta.label, meta.path, Astro.site!)],
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description} path={meta.path} pageJsonLd={pageJsonLd}>
+  <PageHero eyebrow={support.eyebrow} directAnswer={support.directAnswer} compact>
+    {support.heading.before}<Band dots={4}>{support.heading.band}</Band>{support.heading.after}
+  </PageHero>
+
+  <Section title={support.contact.heading} compact>
+    <div class="contact-block">
+      <p>Email: <a href="mailto:earlvlee@gmail.com?subject=Rally%20Replay">earlvlee@gmail.com</a></p>
+      <p>{support.contact.body}</p>
+    </div>
+  </Section>
+
+  <Section title={support.troubleshootingHeading} compact>
+    <QaList items={support.items} />
+    <p class="related"><a class="secondary-link" href={href('/faq/')}>{faqLabel}</a> and <a class="secondary-link" href={href('/privacy/')}>{privacyLabel}</a>.</p>
+  </Section>
+</BaseLayout>
+
+<style>
+  .contact-block {
+    max-width: 760px;
+  }
+
+  .contact-block p {
+    margin-block-end: 0.8rem;
+    color: #d2d2d7;
+  }
+
+  .contact-block a {
+    font-weight: 650;
+    text-decoration-color: var(--yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .related {
+    margin-block-start: 2.5rem;
+  }
+</style>

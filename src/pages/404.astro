@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Ruler from '../components/Ruler.astro';
+import { href } from '../lib/url';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you requested could not be found."
+  path="/404.html"
+>
+  <section class="not-found">
+    <p class="eyebrow">404 · OUT OF BOUNDS</p>
+    <h1>That rally is out.</h1>
+    <p>The page you requested could not be found.</p>
+    <a class="secondary-link" href={href('/')}>Back to Rally Replay →</a>
+    <Ruler />
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    width: min(calc(100% - 48px), var(--content-width));
+    min-height: 50vh;
+    margin: 0 auto;
+    padding-block: clamp(5rem, 12vw, 10rem);
+  }
+
+  .not-found p:not(.eyebrow) {
+    color: #d2d2d7;
+  }
+
+  .not-found a {
+    margin-block-start: 1rem;
+  }
+
+  @media (min-width: 760px) {
+    .not-found {
+      width: min(calc(100% - 96px), var(--content-width));
+    }
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+import AppStoreCta from './AppStoreCta.astro';
+import { href } from '../lib/url';
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <nav aria-label="Product links">
+      <p>Product</p>
+      <a href={href('/')}>Home</a>
+      <a href={href('/how-it-works/')}>How it works</a>
+      <a href={href('/faq/')}>FAQ</a>
+    </nav>
+    <nav aria-label="Company links">
+      <p>Company</p>
+      <a href={href('/press/')}>Press</a>
+      <a href={href('/support/')}>Support</a>
+      <a href={href('/privacy/')}>Privacy</a>
+      <a href="mailto:earlvlee@gmail.com?subject=Rally%20Replay">earlvlee@gmail.com</a>
+    </nav>
+    <div class="maker">
+      <p>Built by Earl Lee, a rec player in New York. © 2026</p>
+      <AppStoreCta compact />
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-block-start: clamp(7rem, 12vw, 12rem);
+    border-top: 1px solid var(--panel-2);
+  }
+
+  .footer-inner {
+    display: grid;
+    width: min(calc(100% - 48px), var(--content-width));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem 2rem;
+    margin: 0 auto;
+    padding-block: 3.5rem 4.5rem;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+
+  nav p {
+    margin-block-end: 0.4rem;
+    color: var(--yellow);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  nav a {
+    color: #c7c7cc;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+
+  .maker {
+    grid-column: 1 / -1;
+  }
+
+  .maker p {
+    max-width: 28rem;
+    margin-block-end: 1.35rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 760px) {
+    .footer-inner {
+      width: min(calc(100% - 96px), var(--content-width));
+      grid-template-columns: 0.75fr 1fr 1.5fr;
+    }
+
+    .maker {
+      grid-column: auto;
+      justify-self: end;
+    }
+  }
+</style>

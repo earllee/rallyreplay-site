@@ -1,0 +1,76 @@
+---
+import { APP_STORE_URL } from '../lib/config';
+import { appStoreCtaText } from '../content/site';
+
+interface Props {
+  compact?: boolean;
+  shortOnMobile?: boolean;
+}
+
+const { compact = false, shortOnMobile = false } = Astro.props;
+const fullLabel = APP_STORE_URL ? appStoreCtaText.available : appStoreCtaText.comingSoon;
+const shortLabel = APP_STORE_URL ? appStoreCtaText.availableShort : appStoreCtaText.comingSoonShort;
+---
+
+{
+  APP_STORE_URL ? (
+    <a class:list={['app-store-cta', { compact }]} href={APP_STORE_URL}>
+      <span class:list={{ 'full-label': shortOnMobile }}>{fullLabel}</span>
+      {shortOnMobile && <span class="short-label">{shortLabel}</span>}
+    </a>
+  ) : (
+    <span class:list={['app-store-cta', 'coming-soon', { compact }]}>
+      <span class:list={{ 'full-label': shortOnMobile }}>{fullLabel}</span>
+      {shortOnMobile && <span class="short-label">{shortLabel}</span>}
+    </span>
+  )
+}
+
+<style>
+  .app-store-cta {
+    display: inline-flex;
+    min-height: 50px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--yellow);
+    border-radius: 999px;
+    background: var(--yellow);
+    color: var(--bg);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  a.app-store-cta:hover {
+    border-color: #ffe45e;
+    background: #ffe45e;
+    color: var(--bg);
+  }
+
+  .coming-soon {
+    cursor: default;
+  }
+
+  .compact {
+    min-height: 40px;
+    padding: 0.58rem 0.9rem;
+    font-size: 0.875rem;
+  }
+
+  .short-label {
+    display: none;
+  }
+
+  @media (max-width: 479px) {
+    .full-label {
+      display: none;
+    }
+
+    .short-label {
+      display: inline;
+    }
+  }
+</style>

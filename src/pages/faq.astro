@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
+import PageHero from '../components/PageHero.astro';
+import QaList from '../components/QaList.astro';
+import { faq, pageMeta } from '../content/site';
+import { breadcrumbEntity } from '../lib/schema';
+
+const meta = pageMeta.faq;
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.items.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      })),
+    },
+    breadcrumbEntity(meta.label, meta.path, Astro.site!),
+  ],
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description} path={meta.path} pageJsonLd={pageJsonLd}>
+  <PageHero eyebrow={faq.eyebrow} directAnswer={faq.directAnswer} compact>
+    {faq.heading.before}<Band dots={4}>{faq.heading.band}</Band>{faq.heading.after}
+  </PageHero>
+  <section class="faq-section" aria-labelledby="faq-list-heading">
+    <h2 id="faq-list-heading">Rally Replay questions</h2>
+    <QaList items={faq.items} />
+  </section>
+</BaseLayout>
+
+<style>
+  .faq-section {
+    width: min(calc(100% - 48px), 900px);
+    margin: clamp(6rem, 8vw, 8rem) max(24px, calc((100% - var(--content-width)) / 2)) 0;
+  }
+
+  h2 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (min-width: 760px) {
+    .faq-section {
+      width: min(calc(100% - 96px), 900px);
+      margin-inline: max(48px, calc((100% - var(--content-width)) / 2));
+    }
+  }
+</style>

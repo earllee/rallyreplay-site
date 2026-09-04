@@ -1,0 +1,366 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppStoreCta from '../components/AppStoreCta.astro';
+import Band from '../components/Band.astro';
+import Device from '../components/Device.astro';
+import QaList from '../components/QaList.astro';
+import Ruler from '../components/Ruler.astro';
+import Section from '../components/Section.astro';
+import StepList from '../components/StepList.astro';
+import { APP_STORE_URL } from '../lib/config';
+import { absoluteUrl, organizationEntity } from '../lib/schema';
+import { href } from '../lib/url';
+import { home, pageMeta, pressFrames, screenMedia } from '../content/site';
+import findingRalliesImage from '../assets/screens/finding-rallies.png';
+import rallyTimelineImage from '../assets/screens/rally-timeline.png';
+import slowMotionImage from '../assets/screens/slow-motion.png';
+import clipMenuImage from '../assets/screens/clip-menu.png';
+import scrubImage from '../assets/screens/scrub.png';
+
+const meta = pageMeta.home;
+const screenImages = {
+  findingRallies: findingRalliesImage,
+  rallyTimeline: rallyTimelineImage,
+  slowMotion: slowMotionImage,
+  clipMenu: clipMenuImage,
+} as const;
+const organization = organizationEntity(Astro.site!);
+const featureList = home.features.map((feature) =>
+  `${feature.heading.before}${feature.heading.band}${feature.heading.after}`,
+);
+const softwareApplication = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Rally Replay',
+  alternateName: 'Rally Replay: Pickleball',
+  applicationCategory: 'SportsApplication',
+  applicationSubCategory: 'Video review',
+  operatingSystem: 'iOS 17.0 or later',
+  offers: {
+    '@type': 'Offer',
+    price: 9.99,
+    priceCurrency: 'USD',
+    category: 'one-time purchase',
+  },
+  screenshot: pressFrames.map((frame) => absoluteUrl(`/press/${frame.file}`, Astro.site!)),
+  featureList,
+  description: home.directAnswer,
+  author: organization,
+  publisher: organization,
+  url: APP_STORE_URL || absoluteUrl('/', Astro.site!),
+  image: absoluteUrl('/brand/icon-1024.png', Astro.site!),
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description} path={meta.path} home pageJsonLd={softwareApplication}>
+  <section class="home-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">{home.eyebrow}</p>
+      <h1>{home.heading.before}<Band dots={4}>{home.heading.band}</Band>{home.heading.after}</h1>
+      <p class="direct-answer">{home.directAnswer}</p>
+      <div class="hero-actions">
+        <AppStoreCta />
+        <a class="secondary-link" href={href('/how-it-works/')}>{home.secondaryCta}</a>
+      </div>
+      <Ruler hero />
+      <div class="proof-strip" aria-label="Example results">
+        {home.proofs.map((proof) => (
+          <div class="proof">
+            <strong>{proof.value}</strong>
+            <span>{proof.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="hero-device">
+      <Device
+        src={scrubImage}
+        alt={screenMedia.scrub.alt}
+        caption={screenMedia.scrub.caption}
+        hero
+        priority
+      />
+    </div>
+  </section>
+
+  <Section title={home.featuresHeading} id="features">
+    <div class="feature-list">
+      {home.features.map((feature, index) => {
+        const media = screenMedia[feature.screen];
+        return (
+          <article class:list={['feature-row', { reverse: index % 2 === 1 }]}>
+            <Device
+              src={screenImages[feature.screen]}
+              alt={media.alt}
+              caption={media.caption}
+            />
+            <div class="feature-copy">
+              <p class="eyebrow">{feature.eyebrow}</p>
+              <h3>{feature.heading.before}<Band>{feature.heading.band}</Band>{feature.heading.after}</h3>
+              <p>{feature.body}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </Section>
+
+  <Section title={home.howHeading}>
+    <StepList items={home.steps} />
+    <a class="secondary-link section-link" href={href('/how-it-works/')}>{home.howLink}</a>
+  </Section>
+
+  <Section title={home.audienceHeading}>
+    <div class="audiences">
+      {home.audiences.map((audience) => (
+        <article>
+          <h3>{audience.title}</h3>
+          <p>{audience.body}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section title={home.priceHeading}>
+    <div class="price-lockup">
+      <div>
+        <p class="price">{home.price}</p>
+        <p class="eyebrow">{home.priceEyebrow}</p>
+      </div>
+      <p>{home.priceBody}</p>
+    </div>
+    <article class="ai-note">
+      <h3>{home.aiHeading}</h3>
+      <p>{home.aiBody}</p>
+    </article>
+  </Section>
+
+  <Section title={home.privacyHeading}>
+    <ul class="privacy-facts">
+      {home.privacyFacts.map((fact) => <li><span aria-hidden="true">✓</span>{fact}</li>)}
+    </ul>
+    <a class="secondary-link section-link" href={href('/privacy/')}>{home.privacyLink}</a>
+  </Section>
+
+  <Section title={home.questionsHeading}>
+    <QaList items={home.questions} columns />
+    <a class="secondary-link section-link" href={href('/faq/')}>{home.questionsLink}</a>
+  </Section>
+
+  <Section class="final-cta">
+    <Fragment slot="heading">{home.finalHeading.before}<Band dots={4}>{home.finalHeading.band}</Band>{home.finalHeading.after}</Fragment>
+    <div class="final-action">
+      <AppStoreCta />
+      <p class="small">{home.finalNote}</p>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .home-hero {
+    display: grid;
+    width: min(calc(100% - 48px), var(--content-width));
+    gap: 4.5rem;
+    margin: 0 auto;
+    padding-block: clamp(4.75rem, 8vw, 8rem) 0;
+  }
+
+  .hero-copy {
+    min-width: 0;
+  }
+
+  .direct-answer {
+    max-width: 700px;
+    margin: 0;
+    color: #d2d2d7;
+    font-size: clamp(1.125rem, 1.02rem + 0.55vw, 1.375rem);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 1.75rem;
+    align-items: center;
+    margin-block-start: 2rem;
+  }
+
+  .proof-strip {
+    display: grid;
+    gap: 1.5rem;
+    margin-block-start: 1.75rem;
+  }
+
+  .proof {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding-inline-start: 1rem;
+    border-left: 2px solid var(--yellow);
+  }
+
+  .proof strong {
+    font-family: var(--font-mono);
+    font-size: clamp(1.2rem, 1.05rem + 0.75vw, 1.6rem);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.04em;
+  }
+
+  .proof span {
+    max-width: 38ch;
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .hero-device {
+    display: flex;
+    justify-content: center;
+  }
+
+  .feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(6rem, 12vw, 10rem);
+  }
+
+  .feature-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .feature-copy {
+    max-width: 540px;
+  }
+
+  .feature-copy p:last-child {
+    margin: 0;
+    color: #c7c7cc;
+  }
+
+  .audiences {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .audiences article {
+    max-width: 520px;
+  }
+
+  .audiences p {
+    margin: 0;
+    color: #c7c7cc;
+  }
+
+  .price-lockup {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .price {
+    margin-block-end: 0.1em;
+    font-family: var(--font-mono);
+    font-size: clamp(4rem, 2.25rem + 8.75vw, 8.5rem);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.08em;
+    line-height: 0.9;
+  }
+
+  .price-lockup > p {
+    margin: 0;
+    color: #d2d2d7;
+  }
+
+  .ai-note {
+    max-width: 820px;
+    margin-block-start: clamp(3rem, 6vw, 5rem);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border-left: 3px solid var(--yellow);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: linear-gradient(90deg, var(--panel), rgba(28, 28, 30, 0.25));
+  }
+
+  .ai-note p {
+    margin: 0;
+    color: #c7c7cc;
+  }
+
+  .privacy-facts {
+    display: grid;
+    max-width: 840px;
+    gap: 1.2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .privacy-facts li {
+    display: grid;
+    grid-template-columns: 1.75rem 1fr;
+    gap: 0.75rem;
+  }
+
+  .privacy-facts span {
+    color: var(--yellow);
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+
+  .section-link {
+    margin-block-start: 2.5rem;
+  }
+
+  .final-action {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    align-items: center;
+  }
+
+  .final-action p {
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .proof-strip,
+    .audiences,
+    .price-lockup {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 760px) {
+    .home-hero {
+      width: min(calc(100% - 96px), var(--content-width));
+    }
+  }
+
+  @media (min-width: 900px) {
+    .home-hero {
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+      gap: clamp(3rem, 6vw, 6.5rem);
+      align-items: center;
+    }
+
+    .feature-row {
+      flex-direction: row;
+      justify-content: space-around;
+      gap: clamp(4rem, 9vw, 8rem);
+    }
+
+    .feature-row.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .feature-row > :global(figure) {
+      flex: 0 0 360px;
+    }
+
+    .feature-copy {
+      flex: 0 1 520px;
+    }
+  }
+</style>

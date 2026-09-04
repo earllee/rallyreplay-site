@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import { pageMeta, privacy } from '../content/site';
+import { breadcrumbEntity } from '../lib/schema';
+
+const meta = pageMeta.privacy;
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [breadcrumbEntity(meta.label, meta.path, Astro.site!)],
+};
+const aiSection = privacy.sections[1];
+const [aiBeforeLink, aiAfterLink] = aiSection.body.split('OpenAI’s privacy policy');
+---
+
+<BaseLayout title={meta.title} description={meta.description} path={meta.path} pageJsonLd={pageJsonLd}>
+  <PageHero eyebrow={privacy.eyebrow} directAnswer={privacy.directAnswer} compact>
+    {privacy.heading.before}<Band dots={4}>{privacy.heading.band}</Band>{privacy.heading.after}
+  </PageHero>
+
+  {privacy.sections.map((section, index) => (
+    <Section title={section.heading} compact>
+      {index === 1 ? (
+        <p class="policy-copy">
+          {aiBeforeLink}<a href="https://openai.com/policies/privacy-policy">OpenAI’s privacy policy</a>{aiAfterLink}
+        </p>
+      ) : index === privacy.sections.length - 1 ? (
+        <p class="policy-copy"><a href="mailto:earlvlee@gmail.com?subject=Rally%20Replay%20privacy">{section.body}</a></p>
+      ) : (
+        <p class="policy-copy">{section.body}</p>
+      )}
+    </Section>
+  ))}
+</BaseLayout>
+
+<style>
+  .policy-copy {
+    max-width: 800px;
+    margin: 0;
+    color: #d2d2d7;
+  }
+
+  .policy-copy a {
+    font-weight: 650;
+    text-decoration-color: var(--yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+</style>

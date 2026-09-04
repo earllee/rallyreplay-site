@@ -1,0 +1,60 @@
+---
+interface QaItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: readonly QaItem[];
+  columns?: boolean;
+}
+
+const { items, columns = false } = Astro.props;
+---
+
+<div class:list={['qa-list', { columns }]}>
+  {items.map((item) => (
+    <article>
+      <h3>{item.question}</h3>
+      <p>{item.answer}</p>
+    </article>
+  ))}
+</div>
+
+<style>
+  .qa-list {
+    max-width: 860px;
+  }
+
+  article {
+    padding-block: 1.65rem;
+    border-top: 1px solid var(--panel-2);
+  }
+
+  article:last-child {
+    border-bottom: 1px solid var(--panel-2);
+  }
+
+  h3,
+  p {
+    max-width: 44rem;
+  }
+
+  p {
+    margin: 0;
+    color: #c7c7cc;
+  }
+
+  @media (min-width: 820px) {
+    .columns {
+      display: grid;
+      max-width: none;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(2.5rem, 6vw, 6rem);
+    }
+
+    .columns article:nth-last-child(2) {
+      border-bottom: 1px solid var(--panel-2);
+    }
+  }
+</style>

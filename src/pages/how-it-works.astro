@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppStoreCta from '../components/AppStoreCta.astro';
+import Band from '../components/Band.astro';
+import Device from '../components/Device.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import StepList from '../components/StepList.astro';
+import { howItWorks, pageMeta, screenMedia } from '../content/site';
+import { breadcrumbEntity } from '../lib/schema';
+import landscapeImage from '../assets/screens/landscape.png';
+
+const meta = pageMeta.howItWorks;
+const { sections } = howItWorks;
+const highlightSteps = sections.highlight.steps.map((body) => ({ body }));
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'HowTo',
+      name: 'How to make a pickleball highlight reel on iPhone with Rally Replay',
+      description: howItWorks.directAnswer,
+      step: sections.highlight.steps.map((text, index) => ({
+        '@type': 'HowToStep',
+        position: index + 1,
+        name: text.split('.')[0],
+        text,
+      })),
+    },
+    breadcrumbEntity(meta.label, meta.path, Astro.site!),
+  ],
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description} path={meta.path} pageJsonLd={pageJsonLd}>
+  <PageHero eyebrow={howItWorks.eyebrow} directAnswer={howItWorks.directAnswer} compact>
+    {howItWorks.heading.before}<Band dots={4}>{howItWorks.heading.band}</Band>{howItWorks.heading.after}
+  </PageHero>
+
+  <Section title={sections.audio.heading} compact>
+    <div class="prose">{sections.audio.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+  </Section>
+
+  <Section title={sections.detector.heading} compact>
+    <StepList items={sections.detector.steps} />
+    <p class="after-steps">{sections.detector.after}</p>
+    <div class="landscape-device">
+      <Device
+        src={landscapeImage}
+        alt={screenMedia.landscape.alt}
+        caption={screenMedia.landscape.caption}
+        landscape
+      />
+    </div>
+  </Section>
+
+  <Section title={sections.accuracy.heading} compact>
+    <div class="prose">{sections.accuracy.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+  </Section>
+
+  <Section title={sections.calibration.heading} compact>
+    <div class="prose">{sections.calibration.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+  </Section>
+
+  <Section title={sections.highlight.heading} compact>
+    <StepList items={highlightSteps} />
+  </Section>
+
+  <Section title={sections.ai.heading} compact>
+    <div class="prose">{sections.ai.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+  </Section>
+
+  <Section title={howItWorks.ctaHeading} compact>
+    <AppStoreCta />
+  </Section>
+</BaseLayout>
+
+<style>
+  .prose,
+  .after-steps {
+    max-width: 800px;
+  }
+
+  .prose p,
+  .after-steps {
+    margin: 0;
+    color: #d2d2d7;
+  }
+
+  .after-steps {
+    margin-block-start: 2rem;
+  }
+
+  .landscape-device {
+    margin-block-start: clamp(3.5rem, 7vw, 6rem);
+  }
+</style>

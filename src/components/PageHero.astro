@@ -1,0 +1,47 @@
+---
+interface Props {
+  eyebrow: string;
+  directAnswer: string;
+  compact?: boolean;
+}
+
+const { eyebrow, directAnswer, compact = false } = Astro.props;
+---
+
+<header class:list={['page-hero', { compact }]}>
+  <p class="eyebrow">{eyebrow}</p>
+  <h1><slot /></h1>
+  <p class="direct-answer">{directAnswer}</p>
+  <slot name="after" />
+</header>
+
+<style>
+  .page-hero {
+    width: min(calc(100% - 48px), var(--content-width));
+    margin: 0 auto;
+    padding-block: clamp(5.5rem, 10vw, 9rem) 0;
+  }
+
+  .page-hero.compact {
+    max-width: 900px;
+    margin-inline: max(24px, calc((100% - var(--content-width)) / 2));
+  }
+
+  .direct-answer {
+    max-width: 720px;
+    margin: 0;
+    color: #d2d2d7;
+    font-size: clamp(1.125rem, 1.02rem + 0.55vw, 1.375rem);
+    line-height: 1.55;
+  }
+
+  @media (min-width: 760px) {
+    .page-hero {
+      width: min(calc(100% - 96px), var(--content-width));
+    }
+
+    .page-hero.compact {
+      margin-inline: max(48px, calc((100% - var(--content-width)) / 2));
+    }
+  }
+</style>

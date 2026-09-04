@@ -1,0 +1,215 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import { pageMeta, press, pressFrames } from '../content/site';
+import { breadcrumbEntity } from '../lib/schema';
+import { href } from '../lib/url';
+import frame01 from '../assets/press-thumbs/01-skip-to-the-good-parts.png';
+import frame02 from '../assets/press-thumbs/02-minus-the-dead-time.png';
+import frame03 from '../assets/press-thumbs/03-found-in-seconds.png';
+import frame04 from '../assets/press-thumbs/04-feel-every-shot.png';
+import frame05 from '../assets/press-thumbs/05-stays-sharp.png';
+import frame06 from '../assets/press-thumbs/06-built-for-court-footage.png';
+
+const meta = pageMeta.press;
+const thumbnails = [frame01, frame02, frame03, frame04, frame05, frame06];
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [breadcrumbEntity(meta.label, meta.path, Astro.site!)],
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description} path={meta.path} pageJsonLd={pageJsonLd}>
+  <PageHero eyebrow={press.eyebrow} directAnswer={press.directAnswer} compact>
+    {press.heading.before}<Band dots={4}>{press.heading.band}</Band>{press.heading.after}
+  </PageHero>
+
+  <Section title={press.boilerplateHeading} compact>
+    <div class="boilerplate">
+      {press.boilerplate.map((item) => (
+        <p><strong>{item.label}:</strong> {item.body}</p>
+      ))}
+    </div>
+  </Section>
+
+  <Section title={press.factsHeading} compact>
+    <dl class="facts">
+      {press.facts.map(([term, value]) => (
+        <div>
+          <dt>{term}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))}
+    </dl>
+  </Section>
+
+  <Section title={press.screenshotsHeading} compact>
+    <div class="press-grid">
+      {pressFrames.map((frame, index) => (
+        <figure class:list={{ landscape: frame.width > frame.height }}>
+          <a href={href(`/press/${frame.file}`)} download>
+            <Image
+              src={thumbnails[index]}
+              alt={frame.caption}
+              width={frame.width > frame.height ? 900 : 440}
+              format="avif"
+              quality={78}
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <figcaption>{frame.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="screens-note">{press.screenshotsNote}</p>
+  </Section>
+
+  <Section title={press.iconHeading} compact>
+    <figure class="icon-figure">
+      <a href={href('/brand/icon-1024.png')} download aria-label="Download the Rally Replay app icon">
+        <img
+          src={href('/brand/icon-1024.png')}
+          alt="Rally Replay app icon"
+          width="160"
+          height="160"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <figcaption><a class="secondary-link" href={href('/brand/icon-1024.png')} download>Download PNG</a></figcaption>
+    </figure>
+  </Section>
+
+  <Section title={press.usageHeading} compact>
+    <p class="usage">{press.usageBody}</p>
+  </Section>
+</BaseLayout>
+
+<style>
+  .boilerplate {
+    max-width: 820px;
+  }
+
+  .boilerplate p {
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--panel-2);
+    color: #d2d2d7;
+  }
+
+  .boilerplate p:last-child {
+    margin: 0;
+    border-bottom: 1px solid var(--panel-2);
+  }
+
+  .boilerplate strong {
+    color: var(--text);
+  }
+
+  .facts {
+    display: grid;
+    max-width: 850px;
+    margin: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .facts div {
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 0.55fr) 1.45fr;
+    gap: 1.25rem;
+    padding-block: 1rem;
+    border-top: 1px solid var(--panel-2);
+  }
+
+  .facts div:last-child {
+    border-bottom: 1px solid var(--panel-2);
+  }
+
+  dt {
+    color: var(--yellow);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    color: #d2d2d7;
+  }
+
+  .press-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+
+  .press-grid figure {
+    margin: 0;
+  }
+
+  .press-grid a {
+    display: block;
+    overflow: hidden;
+    border-radius: clamp(1.15rem, 3vw, 2.2rem);
+    background: var(--panel);
+  }
+
+  .press-grid :global(img) {
+    width: 100%;
+  }
+
+  .press-grid figcaption {
+    max-width: 30ch;
+    margin-block-start: 0.85rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  .press-grid .landscape {
+    grid-column: 1 / -1;
+  }
+
+  .screens-note {
+    margin: 2.5rem 0 0;
+    color: #d2d2d7;
+  }
+
+  .icon-figure {
+    margin: 0;
+  }
+
+  .icon-figure > a {
+    display: block;
+    width: 160px;
+    overflow: hidden;
+    border-radius: 36px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .icon-figure figcaption {
+    margin-block-start: 1.25rem;
+  }
+
+  .usage {
+    margin: 0;
+    color: #d2d2d7;
+  }
+
+  @media (min-width: 760px) {
+    .press-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .press-grid .landscape {
+      grid-column: 1 / -1;
+      width: 66%;
+    }
+  }
+</style>

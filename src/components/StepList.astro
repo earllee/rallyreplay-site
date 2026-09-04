@@ -1,0 +1,58 @@
+---
+interface Step {
+  title?: string;
+  body: string;
+}
+
+interface Props {
+  items: readonly Step[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="steps">
+  {items.map((item) => (
+    <li>
+      <span class="number" aria-hidden="true"></span>
+      <p>{item.title && <strong>{item.title}</strong>} {item.body}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps {
+    max-width: 850px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: clamp(3.5rem, 8vw, 6.5rem) 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding-block: 1.8rem;
+    border-top: 1px solid var(--panel-2);
+    counter-increment: step;
+  }
+
+  li:last-child {
+    border-bottom: 1px solid var(--panel-2);
+  }
+
+  .number::before {
+    content: counter(step, decimal-leading-zero);
+    color: var(--yellow);
+    font-family: var(--font-mono);
+    font-size: clamp(1.6rem, 1.25rem + 1.7vw, 2.6rem);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  p {
+    margin: 0;
+  }
+</style>
