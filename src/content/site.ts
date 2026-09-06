@@ -28,7 +28,7 @@ export const pageMeta = {
   howItWorks: {
     path: '/how-it-works/',
     label: 'How it works',
-    title: 'How Replay Rally finds pickleball rallies without uploading your video',
+    title: 'How on-device rally detection works',
     description:
       'Replay Rally detects pickleball rallies from the sound of paddle contact using on-device signal processing. Here’s what it listens for, how accurate it is, how calibration works, and exactly what the optional AI coaching sends.',
     llmsDescription: 'How on-device audio detection, calibration, export, and optional AI coaching work.',
@@ -36,7 +36,7 @@ export const pageMeta = {
   faq: {
     path: '/faq/',
     label: 'FAQ',
-    title: 'Replay Rally FAQ — pickleball video review on iPhone',
+    title: 'FAQ — pickleball video review on iPhone',
     description:
       'Answers about Replay Rally: what it costs, what it uploads (nothing), supported phones and videos, accuracy, calibration, the optional OpenAI coaching, and refunds.',
     llmsDescription: 'Answers about price, privacy, compatibility, detection, exports, AI coaching, and support.',
@@ -44,7 +44,7 @@ export const pageMeta = {
   support: {
     path: '/support/',
     label: 'Support',
-    title: 'Replay Rally support',
+    title: 'Support',
     description:
       'Get help with Replay Rally for iPhone: contact, troubleshooting missed or extra rallies, calibration, export, and the optional OpenAI key.',
     llmsDescription: 'Contact information and fixes for common detection, export, and OpenAI issues.',
@@ -52,7 +52,7 @@ export const pageMeta = {
   privacy: {
     path: '/privacy/',
     label: 'Privacy',
-    title: 'Replay Rally privacy policy',
+    title: 'Privacy policy',
     description:
       'Replay Rally collects no personal data. Videos stay on your iPhone; the optional AI coaching sends frames to OpenAI only under your own key when you start an analysis.',
     llmsDescription: 'Privacy policy covering on-device video processing and optional OpenAI requests.',
@@ -60,7 +60,7 @@ export const pageMeta = {
   press: {
     path: '/press/',
     label: 'Press',
-    title: 'Replay Rally press kit',
+    title: 'Press kit',
     description:
       'Boilerplate, screenshots, and app icon for Replay Rally, the $9.99 iPhone app that finds pickleball rallies on-device.',
     llmsDescription: 'Press boilerplate, product facts, downloadable screenshots, icon, and usage terms.',
