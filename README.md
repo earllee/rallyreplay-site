@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-The default configuration serves the project at `http://localhost:4321/rallyreplay-site/`.
+The default configuration serves the project at `http://localhost:4321/`.
 
 To preview the production build:
 
@@ -34,19 +34,19 @@ Pushing `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.ym
 The workflow sets these deployment values:
 
 ```text
-SITE_URL=https://YOUR-GITHUB-PAGES-HOST
-BASE_PATH=/rallyreplay-site
+SITE_URL=https://replayrally.com
+BASE_PATH=/
 ```
 
-## Switch to the custom domain
+## Custom domain
 
-To move the site to `https://rallyreplay.app`:
+The site is served at `https://replayrally.com`. Three things keep it there:
 
-1. Change the workflow environment to `SITE_URL=https://rallyreplay.app` and `BASE_PATH=/`.
-2. Add `public/CNAME` containing `rallyreplay.app`.
-3. Configure the domain in the repository’s GitHub Pages settings and update its DNS records.
+1. The workflow environment sets `SITE_URL=https://replayrally.com` and `BASE_PATH=/` (also the defaults in `astro.config.mjs`).
+2. `public/CNAME` contains `replayrally.com`.
+3. The domain is configured in the repository's GitHub Pages settings, with DNS at Cloudflare.
 
-All site-relative links and assets pass through [`src/lib/url.ts`](src/lib/url.ts), so no search-and-replace is required.
+All site-relative links and assets pass through [`src/lib/url.ts`](src/lib/url.ts), so moving to another host or path is a change to those two values, not a search-and-replace.
 
 ## Set the App Store URL
 

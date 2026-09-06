@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const site = process.env.SITE_URL ?? 'https://earllee.github.io';
-const requestedBase = process.env.BASE_PATH ?? '/rallyreplay-site';
+const site = process.env.SITE_URL ?? 'https://replayrally.com';
+const requestedBase = process.env.BASE_PATH ?? '/';
 const base = requestedBase === '/' ? '/' : `/${requestedBase.replace(/^\/+|\/+$/g, '')}`;
 const indexedRoutes = new Set(['/', '/how-it-works/', '/faq/', '/support/', '/privacy/', '/press/']);
 

@@ -15,8 +15,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SITE_URL: https://earllee.github.io
-  BASE_PATH: /rallyreplay-site
+  SITE_URL: https://replayrally.com
+  BASE_PATH: /
 
 jobs:
   deploy:
