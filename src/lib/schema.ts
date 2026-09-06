@@ -10,7 +10,7 @@ export function organizationEntity(site: URL) {
   return {
     '@type': 'Organization',
     '@id': `${root}#organization`,
-    name: 'Rally Replay',
+    name: 'Replay Rally',
     url: root,
     logo: absoluteUrl('/brand/icon-1024.png', site),
     ...(SUPPORT_EMAIL

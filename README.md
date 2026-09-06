@@ -1,6 +1,6 @@
-# Rally Replay marketing site
+# Replay Rally marketing site
 
-Static marketing, support, privacy, FAQ, and press site for Rally Replay. The site is built with Astro 5 and deploys to GitHub Pages without a client-side UI framework.
+Static marketing, support, privacy, FAQ, and press site for Replay Rally. The site is built with Astro 5 and deploys to GitHub Pages without a client-side UI framework.
 
 ## Run locally
 

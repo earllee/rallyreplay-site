@@ -18,7 +18,7 @@ export const GET: APIRoute = ({ site }) => {
     SUPPORT_EMAIL ? ` Email ${SUPPORT_EMAIL}.` : ''
   }`;
   const body = [
-    '# Rally Replay',
+    '# Replay Rally',
     `> ${home.directAnswer}`,
     '## Pages',
     pages,

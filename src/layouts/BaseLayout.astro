@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { title, description, path, home = false, pageJsonLd } = Astro.props;
-const documentTitle = home ? title : `${title} — Rally Replay`;
+const documentTitle = home ? title : `${title} — Replay Rally`;
 const siteUrl = new URL(href('/'), Astro.site).href;
 const canonicalUrl = new URL(href(path), Astro.site).href;
 const iconUrl = new URL(href('/brand/icon-1024.png'), Astro.site).href;
@@ -29,7 +29,7 @@ const siteJsonLd = {
     {
       '@type': 'WebSite',
       '@id': `${siteUrl}#website`,
-      name: 'Rally Replay',
+      name: 'Replay Rally',
       url: siteUrl,
       publisher: { '@id': `${siteUrl}#organization` },
     },
@@ -50,14 +50,14 @@ const siteJsonLd = {
     <link rel="icon" type="image/png" href={iconUrl} />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Rally Replay" />
+    <meta property="og:site_name" content="Replay Rally" />
     <meta property="og:title" content={documentTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="628" />
-    <meta property="og:image:alt" content="Rally Replay — skip to the good parts of your pickleball videos" />
+    <meta property="og:image:alt" content="Replay Rally — skip to the good parts of your pickleball videos" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={documentTitle} />

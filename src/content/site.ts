@@ -1,7 +1,7 @@
 import { APP_STORE_URL, SUPPORT_EMAIL, SUPPORT_EMPTY_STATE } from '../lib/config';
 
 const supportPath = '/support/';
-const supportMailto = SUPPORT_EMAIL ? `mailto:${SUPPORT_EMAIL}?subject=Rally%20Replay` : '';
+const supportMailto = SUPPORT_EMAIL ? `mailto:${SUPPORT_EMAIL}?subject=Replay%20Rally` : '';
 const faqHelpAnswer = `Through the support page at ${supportPath}. A short clip of the footage that gave the detector trouble helps enormously${
   SUPPORT_EMAIL ? `, or email ${SUPPORT_EMAIL}` : ''
 }.`;
@@ -20,49 +20,49 @@ export const pageMeta = {
   home: {
     path: '/',
     label: 'Home',
-    title: 'Rally Replay — Skip to the good parts of your pickleball videos',
+    title: 'Replay Rally — Skip to the good parts of your pickleball videos',
     description:
-      'Rally Replay is a $9.99 iPhone app that finds every rally in a pickleball video on-device in seconds, so you can jump point to point, watch in slow motion, and export a highlight reel with the dead time removed.',
+      'Replay Rally is a $9.99 iPhone app that finds every rally in a pickleball video on-device in seconds, so you can jump point to point, watch in slow motion, and export a highlight reel with the dead time removed.',
     llmsDescription: 'Product overview, features, price, privacy, and common questions.',
   },
   howItWorks: {
     path: '/how-it-works/',
     label: 'How it works',
-    title: 'How Rally Replay finds pickleball rallies without uploading your video',
+    title: 'How Replay Rally finds pickleball rallies without uploading your video',
     description:
-      'Rally Replay detects pickleball rallies from the sound of paddle contact using on-device signal processing. Here’s what it listens for, how accurate it is, how calibration works, and exactly what the optional AI coaching sends.',
+      'Replay Rally detects pickleball rallies from the sound of paddle contact using on-device signal processing. Here’s what it listens for, how accurate it is, how calibration works, and exactly what the optional AI coaching sends.',
     llmsDescription: 'How on-device audio detection, calibration, export, and optional AI coaching work.',
   },
   faq: {
     path: '/faq/',
     label: 'FAQ',
-    title: 'Rally Replay FAQ — pickleball video review on iPhone',
+    title: 'Replay Rally FAQ — pickleball video review on iPhone',
     description:
-      'Answers about Rally Replay: what it costs, what it uploads (nothing), supported phones and videos, accuracy, calibration, the optional OpenAI coaching, and refunds.',
+      'Answers about Replay Rally: what it costs, what it uploads (nothing), supported phones and videos, accuracy, calibration, the optional OpenAI coaching, and refunds.',
     llmsDescription: 'Answers about price, privacy, compatibility, detection, exports, AI coaching, and support.',
   },
   support: {
     path: '/support/',
     label: 'Support',
-    title: 'Rally Replay support',
+    title: 'Replay Rally support',
     description:
-      'Get help with Rally Replay for iPhone: contact, troubleshooting missed or extra rallies, calibration, export, and the optional OpenAI key.',
+      'Get help with Replay Rally for iPhone: contact, troubleshooting missed or extra rallies, calibration, export, and the optional OpenAI key.',
     llmsDescription: 'Contact information and fixes for common detection, export, and OpenAI issues.',
   },
   privacy: {
     path: '/privacy/',
     label: 'Privacy',
-    title: 'Rally Replay privacy policy',
+    title: 'Replay Rally privacy policy',
     description:
-      'Rally Replay collects no personal data. Videos stay on your iPhone; the optional AI coaching sends frames to OpenAI only under your own key when you start an analysis.',
+      'Replay Rally collects no personal data. Videos stay on your iPhone; the optional AI coaching sends frames to OpenAI only under your own key when you start an analysis.',
     llmsDescription: 'Privacy policy covering on-device video processing and optional OpenAI requests.',
   },
   press: {
     path: '/press/',
     label: 'Press',
-    title: 'Rally Replay press kit',
+    title: 'Replay Rally press kit',
     description:
-      'Boilerplate, screenshots, and app icon for Rally Replay, the $9.99 iPhone app that finds pickleball rallies on-device.',
+      'Boilerplate, screenshots, and app icon for Replay Rally, the $9.99 iPhone app that finds pickleball rallies on-device.',
     llmsDescription: 'Press boilerplate, product facts, downloadable screenshots, icon, and usage terms.',
   },
 } as const;
@@ -70,42 +70,42 @@ export const pageMeta = {
 export const screenMedia = {
   rallyTimeline: {
     file: 'rally-timeline.png',
-    alt: 'Rally Replay on iPhone showing a pickleball court, the rally bar reading Rally 16 of 90 · 7 shots, and the jog wheel with a yellow rally band and shot dots.',
+    alt: 'Replay Rally on iPhone showing a pickleball court, the rally bar reading Rally 16 of 90 · 7 shots, and the jog wheel with a yellow rally band and shot dots.',
     caption: 'Every rally is a band on the wheel; every shot is a dot.',
     width: 1260,
     height: 2736,
   },
   clipMenu: {
     file: 'clip-menu.png',
-    alt: 'The Clip menu in Rally Replay with All rallies (no dead time), Last 15 seconds, Last 10 seconds, and Rally options.',
+    alt: 'The Clip menu in Replay Rally with All rallies (no dead time), Last 15 seconds, Last 10 seconds, and Rally options.',
     caption: 'One tap saves the rally — or the whole game without the waiting.',
     width: 1260,
     height: 2736,
   },
   findingRallies: {
     file: 'finding-rallies.png',
-    alt: 'Rally Replay mid-detection, showing Finding rallies… above the jog wheel while a player swings on court.',
+    alt: 'Replay Rally mid-detection, showing Finding rallies… above the jog wheel while a player swings on court.',
     caption: 'Detection runs on the phone and takes seconds.',
     width: 1260,
     height: 2736,
   },
   scrub: {
     file: 'scrub.png',
-    alt: 'Scrubbing in Rally Replay: the controls fade, leaving the time readout 4:30.9 and the jog wheel, while a player lunges for a low ball.',
+    alt: 'Scrubbing in Replay Rally: the controls fade, leaving the time readout 4:30.9 and the jog wheel, while a player lunges for a low ball.',
     caption: 'Drag the wheel and everything else gets out of the way.',
     width: 1260,
     height: 2736,
   },
   slowMotion: {
     file: 'slow-motion.png',
-    alt: 'Rally Replay playing at ¼× speed with the speed picker, rally bar, and jog wheel visible below the court.',
+    alt: 'Replay Rally playing at ¼× speed with the speed picker, rally bar, and jog wheel visible below the court.',
     caption: '¼×, ½×, 1×, 1.5× — pitch-corrected, full resolution.',
     width: 1260,
     height: 2736,
   },
   landscape: {
     file: 'landscape.png',
-    alt: 'Rally Replay in landscape: a full-screen pickleball court with a thin control strip along the bottom and the Clip button in the side gutter.',
+    alt: 'Replay Rally in landscape: a full-screen pickleball court with a thin control strip along the bottom and the Clip button in the side gutter.',
     caption: 'Landscape keeps every control out of the lower half of the frame.',
     width: 2736,
     height: 1260,
@@ -122,10 +122,10 @@ export const pressFrames = [
 ] as const;
 
 export const home = {
-  eyebrow: 'RALLY REPLAY FOR IPHONE · $9.99 ONE TIME',
+  eyebrow: 'REPLAY RALLY FOR IPHONE · $9.99 ONE TIME',
   heading: { before: 'Skip to the ', band: 'good parts.', after: '' },
   directAnswer:
-    'Rally Replay is an iPhone app for reviewing pickleball videos. Open any game recording from Photos and it finds every rally on your phone in seconds — no upload, no account — so you can jump point to point, slow the fast ones down, and save a highlight reel with the standing-around cut out.',
+    'Replay Rally is an iPhone app for reviewing pickleball videos. Open any game recording from Photos and it finds every rally on your phone in seconds — no upload, no account — so you can jump point to point, slow the fast ones down, and save a highlight reel with the standing-around cut out.',
   secondaryCta: 'See how it works →',
   proofs: [
     {
@@ -137,13 +137,13 @@ export const home = {
       label: 'Rallies found in one 18:58 game, in seconds, with nothing uploaded',
     },
   ],
-  featuresHeading: 'What Rally Replay does',
+  featuresHeading: 'What Replay Rally does',
   features: [
     {
       eyebrow: 'ON-DEVICE DETECTION',
       heading: { before: 'It finds every rally by ', band: 'listening', after: ' for the paddle.' },
       body:
-        'Rally Replay detects rallies from the sound of paddle contact — the pop that lives between 1 and 8 kHz — using signal processing that runs entirely on your iPhone. An hour of footage takes seconds. Your video never leaves the phone.',
+        'Replay Rally detects rallies from the sound of paddle contact — the pop that lives between 1 and 8 kHz — using signal processing that runs entirely on your iPhone. An hour of footage takes seconds. Your video never leaves the phone.',
       screen: 'findingRallies',
     },
     {
@@ -172,7 +172,7 @@ export const home = {
   steps: [
     {
       title: 'Pick a video.',
-      body: 'Choose any pickleball recording from your Photos library. Rally Replay reads only the video you pick, never your library.',
+      body: 'Choose any pickleball recording from your Photos library. Replay Rally reads only the video you pick, never your library.',
     },
     {
       title: 'Rallies appear in seconds.',
@@ -203,21 +203,21 @@ export const home = {
   price: '$9.99',
   priceEyebrow: 'ONE-TIME PURCHASE',
   priceBody:
-    'Rally Replay costs $9.99 once on the App Store. There is no subscription, no account, and no in-app purchase. Every feature above works offline, forever.',
+    'Replay Rally costs $9.99 once on the App Store. There is no subscription, no account, and no in-app purchase. Every feature above works offline, forever.',
   aiHeading: 'Optional AI coaching, bring your own key',
   aiBody:
-    'If you add your own OpenAI API key in Settings, Rally Replay can also analyze a rally — how the point ended, what went wrong, what to work on, each a tappable timestamp — or produce a whole-game report ranking your costliest patterns with drills. You pay OpenAI directly, usually cents per game, and the app shows the estimated cost before every run. Nothing is sent until you tap Analyze.',
+    'If you add your own OpenAI API key in Settings, Replay Rally can also analyze a rally — how the point ended, what went wrong, what to work on, each a tappable timestamp — or produce a whole-game report ranking your costliest patterns with drills. You pay OpenAI directly, usually cents per game, and the app shows the estimated cost before every run. Nothing is sent until you tap Analyze.',
   privacyHeading: 'Private by design',
   privacyFacts: [
     'No account, no analytics, no servers — the developer never sees your footage.',
-    'Add-only Photos access: Rally Replay can save clips but cannot read your library.',
+    'Add-only Photos access: Replay Rally can save clips but cannot read your library.',
     'The only network connection the app can make is the optional OpenAI call, under your own key, when you start an analysis.',
   ],
   privacyLink: 'Privacy policy →',
   questionsHeading: 'Questions',
   questions: [
     {
-      question: 'Does Rally Replay upload my video?',
+      question: 'Does Replay Rally upload my video?',
       answer:
         'No. Rally detection, playback, marking, calibration, and export all run on your iPhone. The optional AI coaching sends still frames to OpenAI only when you tap Analyze with your own API key.',
     },
@@ -242,12 +242,12 @@ export const howItWorks = {
   eyebrow: 'HOW IT WORKS',
   heading: { before: 'It finds rallies by ', band: 'listening,', after: ' not watching.' },
   directAnswer:
-    'Rally Replay finds rallies by analyzing the audio track of your video for the distinctive pop of a pickleball paddle, then grouping those strikes into points. The analysis runs on your iPhone in seconds and nothing is uploaded.',
+    'Replay Rally finds rallies by analyzing the audio track of your video for the distinctive pop of a pickleball paddle, then grouping those strikes into points. The analysis runs on your iPhone in seconds and nothing is uploaded.',
   sections: {
     audio: {
       heading: 'Why audio instead of video?',
       paragraphs: [
-        'A pickleball paddle strike is one of the most recognizable sounds in sport: a short, sharp pop with most of its energy between 1 and 8 kHz. Finding that sound is far cheaper than tracking a ball across 30 frames per second, which is why Rally Replay can process an hour of footage in seconds on a phone, with no cloud, no model download, and no battery drain. It also means the camera angle doesn’t matter — behind the baseline, on a fence, at floor level — as long as the microphone can hear the court.',
+        'A pickleball paddle strike is one of the most recognizable sounds in sport: a short, sharp pop with most of its energy between 1 and 8 kHz. Finding that sound is far cheaper than tracking a ball across 30 frames per second, which is why Replay Rally can process an hour of footage in seconds on a phone, with no cloud, no model download, and no battery drain. It also means the camera angle doesn’t matter — behind the baseline, on a fence, at floor level — as long as the microphone can hear the court.',
       ],
     },
     detector: {
@@ -276,7 +276,7 @@ export const howItWorks = {
     accuracy: {
       heading: 'How accurate is it?',
       paragraphs: [
-        'On a court with one game and a phone within earshot, Rally Replay finds almost every rally with edges within a few tenths of a second of the serve and the ball going dead. The hard case is a busy rec center with games on both sides and a far-away phone: some quiet, far-side points can be missed and occasional strikes from the next court can be picked up. Both have a fix.',
+        'On a court with one game and a phone within earshot, Replay Rally finds almost every rally with edges within a few tenths of a second of the serve and the ball going dead. The hard case is a busy rec center with games on both sides and a far-away phone: some quiet, far-side points can be missed and occasional strikes from the next court can be picked up. Both have a fix.',
       ],
     },
     calibration: {
@@ -288,7 +288,7 @@ export const howItWorks = {
     highlight: {
       heading: 'How to make a pickleball highlight reel on iPhone',
       steps: [
-        'Open Rally Replay and choose a game video from Photos.',
+        'Open Replay Rally and choose a game video from Photos.',
         'Wait a few seconds while the rallies are found; they appear as yellow bands on the wheel.',
         'Optionally delete any false rally with the trash button, or trim an edge by holding it on the wheel and dragging.',
         'Long-press the Clip button and choose “All rallies (no dead time)”. The reel is saved to Photos with the standing-around removed.',
@@ -308,19 +308,19 @@ export const faq = {
   eyebrow: 'FAQ',
   heading: { before: 'Questions, ', band: 'answered.', after: '' },
   directAnswer:
-    'Rally Replay is a $9.99 iPhone app that finds rallies in pickleball videos on-device. Below are the questions people ask before and after buying it.',
+    'Replay Rally is a $9.99 iPhone app that finds rallies in pickleball videos on-device. Below are the questions people ask before and after buying it.',
   items: [
     {
-      question: 'What is Rally Replay?',
+      question: 'What is Replay Rally?',
       answer:
-        'Rally Replay is an iPhone app for reviewing pickleball videos. It automatically finds every rally in a recording, lets you jump between points, watch in slow motion, and export individual rallies or a full highlight reel with the dead time removed.',
+        'Replay Rally is an iPhone app for reviewing pickleball videos. It automatically finds every rally in a recording, lets you jump between points, watch in slow motion, and export individual rallies or a full highlight reel with the dead time removed.',
     },
     {
       question: 'How much does it cost?',
       answer: '$9.99, once, on the App Store. No subscription, no account, no in-app purchases.',
     },
     {
-      question: 'Does Rally Replay upload my video anywhere?',
+      question: 'Does Replay Rally upload my video anywhere?',
       answer:
         'No. Rally detection, playback, marking, calibration, and export all run on your iPhone. The only network call the app can make is to OpenAI, and only if you add your own API key and tap Analyze.',
     },
@@ -359,7 +359,7 @@ export const faq = {
         'It stitches every rally in order into one video with the time between points removed and saves it to your Photos library. A 10-minute session typically becomes a 6-minute reel. The export is passthrough — full original quality, no re-encoding — so it takes seconds.',
     },
     {
-      question: 'Does Rally Replay need access to my photo library?',
+      question: 'Does Replay Rally need access to my photo library?',
       answer:
         'Only add-only access, which lets it save clips. It cannot read, browse, or scan your library. The video you open is handed over by the system picker one file at a time.',
     },
@@ -371,7 +371,7 @@ export const faq = {
     {
       question: 'How much does the AI coaching cost?',
       answer:
-        'You’re billed by OpenAI, not by Rally Replay. A single rally analysis usually costs a few cents and a full game report typically less than a dollar on the Standard tier; the app shows the estimated cost before every run and caches results so you’re never billed twice for the same rally.',
+        'You’re billed by OpenAI, not by Replay Rally. A single rally analysis usually costs a few cents and a full game report typically less than a dollar on the Standard tier; the app shows the estimated cost before every run and caches results so you’re never billed twice for the same rally.',
     },
     {
       question: 'Does it work for tennis, padel, or table tennis?',
@@ -402,7 +402,7 @@ export const support = {
   eyebrow: 'SUPPORT',
   heading: { before: 'We’ll get you ', band: 'back on court.', after: '' },
   directAnswer:
-    'Rally Replay is made by one developer, and support requests go straight to the person who wrote the detector.',
+    'Replay Rally is made by one developer, and support requests go straight to the person who wrote the detector.',
   contact: {
     heading: 'Contact',
     body: SUPPORT_EMAIL || SUPPORT_EMPTY_STATE,
@@ -427,7 +427,7 @@ export const support = {
     {
       question: 'The export didn’t appear in Photos.',
       answer:
-        'The first export asks for add-only Photos permission; if it was declined, enable it in iPhone Settings → Privacy & Security → Photos → Rally Replay → “Add Photos Only”.',
+        'The first export asks for add-only Photos permission; if it was declined, enable it in iPhone Settings → Privacy & Security → Photos → Replay Rally → “Add Photos Only”.',
     },
     {
       question: 'Analyze opens Settings instead of analyzing.',
@@ -447,7 +447,7 @@ export const privacy = {
   eyebrow: 'PRIVACY POLICY · EFFECTIVE SEPTEMBER 3, 2026',
   heading: { before: 'Your footage ', band: 'stays on your phone.', after: '' },
   directAnswer:
-    'Rally Replay does not collect, store, or transmit your personal data. There are no accounts, no analytics, no advertising, and no servers operated by the developer.',
+    'Replay Rally does not collect, store, or transmit your personal data. There are no accounts, no analytics, no advertising, and no servers operated by the developer.',
   sections: [
     {
       heading: 'Your videos',
@@ -477,20 +477,20 @@ export const press = {
   eyebrow: 'PRESS KIT',
   heading: { before: 'Everything you need to ', band: 'write about it.', after: '' },
   directAnswer:
-    'Rally Replay is a $9.99 iPhone app that finds every rally in a pickleball video on-device in seconds and exports highlight reels with the dead time removed. It launched in September 2026 and is made by an independent developer who plays recreational pickleball.',
+    'Replay Rally is a $9.99 iPhone app that finds every rally in a pickleball video on-device in seconds and exports highlight reels with the dead time removed. It launched in September 2026 and is made by an independent developer who plays recreational pickleball.',
   boilerplateHeading: 'Boilerplate',
   boilerplate: [
     {
       label: 'One line',
-      body: 'Rally Replay finds every rally in your pickleball videos on your iPhone, in seconds, so you can skip to the good parts.',
+      body: 'Replay Rally finds every rally in your pickleball videos on your iPhone, in seconds, so you can skip to the good parts.',
     },
     {
       label: 'Short',
-      body: 'Rally Replay is an iPhone app for reviewing pickleball videos. It detects rallies from the sound of paddle contact — entirely on-device, no upload — then lets players jump point to point, watch in slow motion at full resolution, and export single rallies or a dead-time-free highlight reel to Photos. It costs $9.99 once. Optional AI coaching works with the user’s own OpenAI key.',
+      body: 'Replay Rally is an iPhone app for reviewing pickleball videos. It detects rallies from the sound of paddle contact — entirely on-device, no upload — then lets players jump point to point, watch in slow motion at full resolution, and export single rallies or a dead-time-free highlight reel to Photos. It costs $9.99 once. Optional AI coaching works with the user’s own OpenAI key.',
     },
     {
       label: 'Maker',
-      body: 'Rally Replay is built by an independent developer and recreational pickleball player who got tired of scrubbing through camcorder footage at 2× looking for one good point.',
+      body: 'Replay Rally is built by an independent developer and recreational pickleball player who got tired of scrubbing through camcorder footage at 2× looking for one good point.',
     },
   ],
   factsHeading: 'Facts',
@@ -508,11 +508,11 @@ export const press = {
   screenshotsNote: 'Real footage, real detections — nothing in these images is mocked.',
   iconHeading: 'App icon',
   usageHeading: 'Usage',
-  usageBody: 'Screenshots and the icon may be used in coverage of Rally Replay without permission. Please don’t alter the icon.',
+  usageBody: 'Screenshots and the icon may be used in coverage of Replay Rally without permission. Please don’t alter the icon.',
 } as const;
 
 export const llmsFacts = [
-  'Rally Replay is an iPhone app (iOS 17+) for reviewing pickleball videos; $9.99 one-time on the App Store; no subscription, no account.',
+  'Replay Rally is an iPhone app (iOS 17+) for reviewing pickleball videos; $9.99 one-time on the App Store; no subscription, no account.',
   'Finds rallies from the audio of paddle contact (1–8 kHz), on-device, in seconds; nothing is uploaded.',
   'Features: rally timeline with per-shot dots, frame-accurate jog wheel with haptics, ¼×–1.5× playback at original resolution, 8× zoom, one-tap rally clips, and “All rallies (no dead time)” highlight-reel export to Photos.',
   'Manual marking and on-device calibration fix missed or extra rallies.',
