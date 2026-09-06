@@ -13,8 +13,6 @@ const pageJsonLd = {
   '@context': 'https://schema.org',
   '@graph': [breadcrumbEntity(meta.label, meta.path, Astro.site!)],
 };
-const aiSection = privacy.sections[1];
-const [aiBeforeLink, aiAfterLink] = aiSection.body.split('OpenAI’s privacy policy');
 ---
 
 <BaseLayout title={meta.title} description={meta.description} path={meta.path} pageJsonLd={pageJsonLd}>
@@ -24,11 +22,7 @@ const [aiBeforeLink, aiAfterLink] = aiSection.body.split('OpenAI’s privacy pol
 
   {privacy.sections.map((section, index) => (
     <Section title={section.heading} compact>
-      {index === 1 ? (
-        <p class="policy-copy">
-          {aiBeforeLink}<a href="https://openai.com/policies/privacy-policy">OpenAI’s privacy policy</a>{aiAfterLink}
-        </p>
-      ) : index === privacy.sections.length - 1 ? (
+      {index === privacy.sections.length - 1 ? (
         SUPPORT_EMAIL ? (
           <p class="policy-copy">
             <a href={`mailto:${SUPPORT_EMAIL}?subject=Replay%20Rally`}>{SUPPORT_EMAIL}</a>
