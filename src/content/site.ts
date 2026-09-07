@@ -8,6 +8,17 @@ const faqHelpAnswer = `Through the support page at ${supportPath}. A short clip 
 const faqHelpMarkdown = `Through the support page at [${supportPath}](${supportPath}). A short clip of the footage that gave the detector trouble helps enormously${
   SUPPORT_EMAIL ? `, or email [${SUPPORT_EMAIL}](${supportMailto})` : ''
 }.`;
+const faqPlatformsLead = 'Not yet. Currently iPhone only; iPad support is planned. There is no Android version';
+const faqPlatformsAnswer = `${faqPlatformsLead}${SUPPORT_EMAIL ? ` — email ${SUPPORT_EMAIL} to request it` : ''}.`;
+const faqPlatformsMarkdown = `${faqPlatformsLead}${
+  SUPPORT_EMAIL ? ` — email [${SUPPORT_EMAIL}](${supportMailto}) to request it` : ''
+}.`;
+const faqSportsLead =
+  'Not yet. The detector is tuned to the sound of a pickleball paddle, so other racket sports aren’t supported';
+const faqSportsAnswer = `${faqSportsLead}${SUPPORT_EMAIL ? ` — email ${SUPPORT_EMAIL} to request one` : ''}.`;
+const faqSportsMarkdown = `${faqSportsLead}${
+  SUPPORT_EMAIL ? ` — email [${SUPPORT_EMAIL}](${supportMailto}) to request one` : ''
+}.`;
 
 export const appStoreCtaText = {
   available: 'Download on the App Store',
@@ -136,21 +147,25 @@ export const home = {
       value: '90',
       label: 'Rallies found in one 18:58 game, in seconds, with nothing uploaded',
     },
+    {
+      value: 'Seconds',
+      label: 'To process a whole game — review it between games, not the next day',
+    },
   ],
   featuresHeading: 'What Replay Rally does',
   features: [
     {
       eyebrow: 'ON-DEVICE DETECTION',
-      heading: { before: 'It finds every rally by ', band: 'listening', after: ' for the paddle.' },
+      heading: { before: 'Every rally found in ', band: 'seconds,', after: ' by listening for the paddle.' },
       body:
-        'Replay Rally detects rallies from the sound of paddle contact — the pop that lives between 1 and 8 kHz — using signal processing that runs entirely on your iPhone. An hour of footage takes seconds. Your video never leaves the phone.',
+        'Replay Rally detects rallies from the sound of paddle contact — the pop that lives between 1 and 8 kHz — using signal processing that runs entirely on your iPhone. A full game is processed in seconds, not an hour, so you can review it on the bench before the next one. Your video never leaves the phone.',
       screen: 'findingRallies',
     },
     {
       eyebrow: 'RALLY TIMELINE',
-      heading: { before: 'Jump ', band: 'point to point.', after: '' },
+      heading: { before: 'Jump point to point. Scrub ', band: 'frame by frame.', after: '' },
       body:
-        'Every rally shows up as a yellow band on a frame-accurate jog wheel, with a dot for every shot. Tap the chevrons to move between rallies like chapters, or drag the wheel to scrub with your thumb — you’ll feel a haptic tick on every paddle strike.',
+        'Every rally shows up as a yellow band on a frame-accurate jog wheel, with a dot for every shot. Tap the arrows to jump between rallies like chapters. Then drag the wheel to scrub frame by frame — fine enough to catch the paddle angle on a dink or the exact moment a ball clips the net — with a haptic tick on every paddle strike.',
       screen: 'rallyTimeline',
     },
     {
@@ -180,7 +195,7 @@ export const home = {
     },
     {
       title: 'Review.',
-      body: 'Tap between rallies, slow the fast exchanges down, zoom in on the kitchen.',
+      body: 'Tap between rallies, scrub frame by frame, slow the fast exchanges down, zoom in on the kitchen.',
     },
     {
       title: 'Save the good parts.',
@@ -203,7 +218,7 @@ export const home = {
   price: '$19.99',
   priceEyebrow: 'ONE-TIME PURCHASE',
   priceBody:
-    'Replay Rally costs $19.99 once on the App Store. There is no subscription, no account, and no in-app purchase. Every feature above works offline, forever.',
+    'Replay Rally costs $19.99 once on the App Store. There is no subscription, no account, and no in-app purchase. Every feature above works offline, forever. That’s less than most players pay for a single session of open play.',
   aiHeading: 'AI coaching is on the roadmap',
   aiBody:
     'A future update will add optional AI coaching — how the point ended, what to work on, the patterns that cost you games — as a paid subscription, because running it costs real money. Rally detection, playback, and export are included in the one-time price and will stay that way.',
@@ -276,7 +291,7 @@ export const howItWorks = {
     accuracy: {
       heading: 'How accurate is it?',
       paragraphs: [
-        'On a court with one game and a phone within earshot, Replay Rally finds almost every rally with edges within a few tenths of a second of the serve and the ball going dead. The hard case is a busy rec center with games on both sides and a far-away phone: some quiet, far-side points can be missed and occasional strikes from the next court can be picked up. Both have a fix.',
+        'On a court with one game and a phone within earshot, Replay Rally finds almost every rally with edges within a few tenths of a second of the serve and the ball going dead. The hard case is a busy rec center with games on both sides and a far-away phone: some quiet, far-side points can be missed and occasional strikes from the next court can be picked up. Both have a fix: a missed rally takes two taps to mark by hand, a false one is one tap on the trash button to remove, and if either keeps happening on your court, a few marked rallies let calibration retune the detector to it — see the next section.',
       ],
     },
     calibration: {
@@ -331,12 +346,20 @@ export const faq = {
     },
     {
       question: 'Is there an iPad or Android version?',
-      answer: 'Not yet. Version 1 is iPhone only; iPad support is planned. There is no Android version.',
+      answer: faqPlatformsAnswer,
+      markdownAnswer: faqPlatformsMarkdown,
+      answerParts: [
+        faqPlatformsLead,
+        ...(SUPPORT_EMAIL
+          ? ([' — email ', { label: SUPPORT_EMAIL, url: supportMailto }, ' to request it'] as const)
+          : []),
+        '.',
+      ],
     },
     {
       question: 'How long does detection take?',
       answer:
-        'Seconds. The detector analyzes the audio track rather than every video frame, so an hour of footage takes only a few seconds on a modern iPhone.',
+        'Seconds. The detector analyzes the audio track rather than every video frame, so an hour of footage takes only a few seconds on a modern iPhone — fast enough to review a game between games instead of the next day.',
     },
     {
       question: 'How accurate is rally detection?',
@@ -370,7 +393,15 @@ export const faq = {
     },
     {
       question: 'Does it work for tennis, padel, or table tennis?',
-      answer: 'No. The detector is tuned to the sound of a pickleball paddle. Other racket sports aren’t supported.',
+      answer: faqSportsAnswer,
+      markdownAnswer: faqSportsMarkdown,
+      answerParts: [
+        faqSportsLead,
+        ...(SUPPORT_EMAIL
+          ? ([' — email ', { label: SUPPORT_EMAIL, url: supportMailto }, ' to request one'] as const)
+          : []),
+        '.',
+      ],
     },
     {
       question: 'Can I get a refund?',

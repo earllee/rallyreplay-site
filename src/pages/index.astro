@@ -325,7 +325,10 @@ const softwareApplication = {
   }
 
   @media (min-width: 640px) {
-    .proof-strip,
+    .proof-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .audiences,
     .price-lockup {
       grid-template-columns: repeat(2, minmax(0, 1fr));
